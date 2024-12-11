@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const schema = mongoose.schema;
 
@@ -13,10 +13,11 @@ export const ContactSchema = new Schema({
     },
     phoneNumber:{
         type: Number,
-        require: 'Enter your Phone number'
+        message: 'Enter your Phone number'
     },
     email:{
-        type: String
+        type: String,
+        message: 'Enter your email'
     },
     company:{
         type: String
@@ -24,5 +25,25 @@ export const ContactSchema = new Schema({
     created_date:{
         type: Date,
         default: Date.now
+    }
+});
+
+
+const { randomUUID } = require('crypto');
+
+export const DetailsSchema = new Schema({
+    EmployeeID:{
+        type: UUID,
+        default: () => randomUUID()
+    },
+
+    TotalNumberOfExprence:{
+        type: Number,
+        default: "0"
+    },
+
+    Designation:{
+        type: String,
+        message: 'Please enter your designation'
     }
 });
