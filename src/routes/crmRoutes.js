@@ -1,5 +1,5 @@
 //Roting the endpoints 
-import { addNewContact } from "../controllers/crmControllers";
+import { addNewContact, getContact} from "../controllers/crmControllers";
 import { addNewDetails } from "../controllers/crmControllers";
 
 const routes = (app) =>{
@@ -11,9 +11,12 @@ const routes = (app) =>{
         console.log(`Request from: ${req.originalUrl}`)
         console.log(`Request type: ${req.method}`)
         next();
-    },  (req, res, next) =>{
+    },  getContact) 
+    /* (req, res, next) =>{
     res.send('200 Sucessful')
-    }) 
+    })  */
+
+   // .get(getContact)
 
     //create request with status
 
@@ -53,7 +56,7 @@ const routes = (app) =>{
    /*  .post((req,res)=>
     res.send('200 requested created sucessfully')
     ) */
-    
+
     .post(addNewDetails);
 
     app.route('/details/:detailID')

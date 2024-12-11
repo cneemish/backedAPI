@@ -32,6 +32,26 @@ export const addNewContact = async (req, res) => {
     }
 };
 
+/* export const getContact = (req, res) =>{
+    Contact.find({}, (err, contact) => {
+        if(err){
+            res.send(err);
+        }
+        res.json(contact);
+    }
+    )
+} */
+export const getContact = async (req, res) => {
+    try {
+        const contact = await Contact.find();
+        res.json(contact);
+        
+    } catch (err) {
+        res.status(422).send(err); // Send error with a status code
+
+    }
+};
+
 const Details = mongoose.model('Details', DetailsSchema)
 export const addNewDetails = async (req, res) => {
     try {
@@ -42,3 +62,4 @@ export const addNewDetails = async (req, res) => {
         res.status(500).send(err); // Send error with a status code
     }
 };
+
