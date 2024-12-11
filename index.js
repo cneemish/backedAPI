@@ -1,8 +1,10 @@
-import express  from "express";
-
+import express  from "express"; //Initiling express and importing express for node to fetch express jS
+import routes from './src/routes/crmRoutes'; //Importing routes
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
+
+routes(app);
 
 app.get('/', (req, res)=>
     res.send(`Node and Express Server is running on port ${PORT}`)
@@ -10,3 +12,4 @@ app.get('/', (req, res)=>
 app.listen(PORT, ()=>
 console.log(`Server is running on port ${PORT}`)
 );
+
