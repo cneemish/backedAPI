@@ -2,18 +2,39 @@
 
 const routes = (app) =>{
     app.route('/contact')
-    .get((req,res) =>
-        res.send('200 Sucessful')
-    ) //get request with status
 
-    .post((req,res)=>
+    //get request with status
+
+    .get((req,res, next) => {
+        console.log(`Request from: ${req.originalUrl}`)
+        console.log(`Request type: ${req.method}`)
+        next();
+    },  (req, res, next) =>{
+    res.send('200 Sucessful')
+    }) 
+
+    //create request with status
+
+    .post((req,res, next)=> {
+        console.log(`Request from: ${req.originalUrl}`)
+        console.log(`Request type: ${req.method}`)
+        next();
+    }, (req, res, next)=>{
         res.send('200 requested created sucessfully')
-    ) //create request with status
+    })
+    
+    // update request with status for specific ID
 
     app.route('/contact/:contactID')
-    .put ((req,res)=>
-    res.send('200 requested update sucessfully')
-    )   // update request with status for specific ID
+    .put ((req,res,next)=> {
+        console.log(`Request from: ${req.originalUrl}`)
+        console.log(`Request method: ${req.method}`)
+        next();
+    },(req, res, next) => {
+        res.send('200 requested update sucessfully')
+    }
+    
+    )   
 
     .delete ((req,res)=>
     res.send('200 requested deleted sucessfully')
