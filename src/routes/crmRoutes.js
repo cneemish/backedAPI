@@ -1,4 +1,5 @@
 //Roting the endpoints 
+import { addNewContact } from "../controllers/crmControllers";
 
 const routes = (app) =>{
     app.route('/contact')
@@ -15,13 +16,14 @@ const routes = (app) =>{
 
     //create request with status
 
-    .post((req,res, next)=> {
+   /*  .post((req,res, next)=> {
         console.log(`Request from: ${req.originalUrl}`)
         console.log(`Request type: ${req.method}`)
         next();
     }, (req, res, next)=>{
         res.send('200 requested created sucessfully')
-    })
+    }) */
+    .post(addNewContact);
     
     // update request with status for specific ID
 

@@ -29,12 +29,11 @@ export const ContactSchema = new Schema({
 });
 
 
-const { randomUUID } = require('crypto');
+//const { randomUUID } = require('crypto');
 
 export const DetailsSchema = new Schema({
     EmployeeID:{
-        type: UUID,
-        default: () => randomUUID()
+        type: String
     },
 
     TotalNumberOfExprence:{
