@@ -1,5 +1,6 @@
 //Roting the endpoints 
 import { addNewContact } from "../controllers/crmControllers";
+import { addNewDetails } from "../controllers/crmControllers";
 
 const routes = (app) =>{
     app.route('/contact')
@@ -43,14 +44,17 @@ const routes = (app) =>{
     )   //delete request with status for specific ID
 
     //For details 
+
     app.route('/details')
     .get((req,res)=>
         res.send('Details created')
     )
 
-    .post((req,res)=>
+   /*  .post((req,res)=>
     res.send('200 requested created sucessfully')
-    )
+    ) */
+    
+    .post(addNewDetails);
 
     app.route('/details/:detailID')
     .put((req, res) =>

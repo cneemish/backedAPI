@@ -31,3 +31,14 @@ export const addNewContact = async (req, res) => {
         res.status(500).send(err); // Send error with a status code
     }
 };
+
+const Details = mongoose.model('Details', DetailsSchema)
+export const addNewDetails = async (req, res) => {
+    try {
+        const newDetails = new Details(req.body);
+        const savedDetails = await newDetails.save();
+        res.json(savedDetails);
+    } catch (error) {
+        res.status(500).send(err); // Send error with a status code
+    }
+};
