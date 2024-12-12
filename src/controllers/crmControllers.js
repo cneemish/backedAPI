@@ -23,6 +23,7 @@ import { DetailsSchema } from "../models/crmModel";
 const Contact = mongoose.model('Contact', ContactSchema);
 
 //To create data 
+
 export const addNewContact = async (req, res) => {
     try {
         const newContact = new Contact(req.body);
@@ -68,7 +69,29 @@ export const getContactbyID = async(req, res) =>{
 
     }
 }; 
- 
+
+// update data 
+
+
+ export const updateContact = async(req, res) =>{
+    try {
+        const contact = await Contact.findOneAndUpdate({_id: req.params.contactID}, req.body, { new: true});
+        res.json(contact);
+    } catch (error) {
+        res.status(402).send(err);
+    }
+ };
+
+ export const deleteContactByID = async(req, res) => {
+    try {
+        const contact = await Contact.findOneAndDelete({_id: req.params.contactID});
+        res.json({ message: "Deleted the data"});
+    } catch (err) {
+        res.status(402).send(err);
+
+    }
+ };
+
 /* export const getContactbyID = (req, res) =>{
     Contact.findById(req.params.contactId, (err, contact)=>{
         if(err){
@@ -127,6 +150,25 @@ export const getDetailsByID = async(req, res) =>{
         res.json(details);
     } catch (error) {
         res.status(404).send(err); // Send error with a status code
+
+    }
+};
+
+export const updateDetails = async(req, res) =>{
+    try {
+        const details = await Details.findOneAndUpdate({_id: req.params.detailID}, req.body, {new: true});
+        res.json(details);
+    } catch (err) {
+        res.status(402).send(err);
+    }
+};
+
+export const deleteDetailsByID = async(req, res) =>{
+    try {
+        const details = await Details.findOneAndDelete({_id: req.params.detailID} );
+        res.json({message: "Deleted data"});
+    } catch (err) {
+        res.status(402).send(err);
 
     }
 };

@@ -1,9 +1,9 @@
 //Roting the endpoints 
-import { addNewContact, getContact, getContactbyID } from "../controllers/crmControllers";
-import { addNewDetails, getDetails, getDetailsByID} from "../controllers/crmControllers";
+import { addNewContact, getContact, getContactbyID, updateContact, deleteContactByID } from "../controllers/crmControllers";
+import { addNewDetails, getDetails, getDetailsByID, updateDetails, deleteDetailsByID } from "../controllers/crmControllers";
 
 const routes = (app) =>{
-    app.route('/contact')
+app.route('/contact')
 
     //get request with status
 
@@ -31,29 +31,20 @@ const routes = (app) =>{
     
     // Action for specific ID
 
-    app.route('/contact/:contactID')
+app.route('/contact/:contactID')
 
     // to get data was previously created 
 
     .get(getContactbyID)
 
-    .put ((req,res,next)=> {
-        console.log(`Request from: ${req.originalUrl}`)
-        console.log(`Request method: ${req.method}`)
-        next();
-    },(req, res, next) => {
-        res.send('200 requested update sucessfully')
-    }
-    
-    )   
+    .put(updateContact)   
 
-    .delete ((req,res)=>
-    res.send('200 requested deleted sucessfully')
-    )   //delete request with status for specific ID
+    .delete (deleteContactByID)   //delete request with status for specific ID
 
 //For details 
 
-    app.route('/details')
+app.route('/details')
+
     .get(getDetails)
 
    /*  .post((req,res)=>
@@ -62,17 +53,13 @@ const routes = (app) =>{
 
     .post(addNewDetails);
 
-    app.route('/details/:detailID')
+app.route('/details/:detailID')
 
     .get(getDetailsByID)
 
-    .put((req, res) =>
-    res.send('200 requested update sucessfully')    
-    )
+    .put(updateDetails)
 
-    .delete((req, res) => 
-    res.send('200 requested deleted sucessfully')
-    )
+    .delete(deleteDetailsByID)
 
     .patch((req, res) =>
     res.send('Patched data')
