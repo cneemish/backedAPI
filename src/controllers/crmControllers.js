@@ -22,6 +22,7 @@ import { DetailsSchema } from "../models/crmModel";
 
 const Contact = mongoose.model('Contact', ContactSchema);
 
+//To create data 
 export const addNewContact = async (req, res) => {
     try {
         const newContact = new Contact(req.body);
@@ -41,6 +42,9 @@ export const addNewContact = async (req, res) => {
     }
     )
 } */
+
+//To find data 
+
 export const getContact = async (req, res) => {
     try {
         const contact = await Contact.find();
@@ -52,7 +56,48 @@ export const getContact = async (req, res) => {
     }
 };
 
-const Details = mongoose.model('Details', DetailsSchema)
+// to find a specific contact 
+
+export const getContactbyID = async(req, res) =>{
+    try {
+        const contact = await Contact.findById(req.params.contactID);
+        res.json(contact);
+        
+    } catch (err) {
+        res.status(404).send(err); // Send error with a status code
+
+    }
+}; 
+ 
+/* export const getContactbyID = (req, res) =>{
+    Contact.findById(req.params.contactId, (err, contact)=>{
+        if(err){
+            res.send(err);
+        }
+        res.json(contact);
+    })
+}; */
+
+/* export const getContactByID = async (req, res) => {
+    try {
+        const contact = await Contact.findById(req.params.contactId);
+
+        if (!contact) {
+            return res.status(404).send({ message: "Contact not found" }); // Handle "not found" explicitly
+        }
+
+        res.json(contact); // Send the contact data as JSON
+    } catch (err) {
+        res.status(500).send(err); // Internal server error
+    }
+}; */
+
+// To declare anything related to details schema
+
+const Details = mongoose.model('Details', DetailsSchema);
+
+//To create data 
+
 export const addNewDetails = async (req, res) => {
     try {
         const newDetails = new Details(req.body);
@@ -63,3 +108,25 @@ export const addNewDetails = async (req, res) => {
     }
 };
 
+//To find data 
+
+export const getDetails = async(req, res) =>{
+    try {
+        const details = await Details.find();
+        res.json(details);
+
+    } catch (err) {
+                res.status(422).send(err); // Send error with a status code
+
+    }
+};
+
+export const getDetailsByID = async(req, res) =>{
+    try {
+        const details = await Details.findById(req.params.detailID);
+        res.json(details);
+    } catch (error) {
+        res.status(404).send(err); // Send error with a status code
+
+    }
+};

@@ -1,6 +1,6 @@
 //Roting the endpoints 
-import { addNewContact, getContact} from "../controllers/crmControllers";
-import { addNewDetails } from "../controllers/crmControllers";
+import { addNewContact, getContact, getContactbyID } from "../controllers/crmControllers";
+import { addNewDetails, getDetails, getDetailsByID} from "../controllers/crmControllers";
 
 const routes = (app) =>{
     app.route('/contact')
@@ -15,7 +15,7 @@ const routes = (app) =>{
     /* (req, res, next) =>{
     res.send('200 Sucessful')
     })  */
-
+    
    // .get(getContact)
 
     //create request with status
@@ -29,9 +29,14 @@ const routes = (app) =>{
     }) */
     .post(addNewContact);
     
-    // update request with status for specific ID
+    // Action for specific ID
 
     app.route('/contact/:contactID')
+
+    // to get data was previously created 
+
+    .get(getContactbyID)
+
     .put ((req,res,next)=> {
         console.log(`Request from: ${req.originalUrl}`)
         console.log(`Request method: ${req.method}`)
@@ -46,12 +51,10 @@ const routes = (app) =>{
     res.send('200 requested deleted sucessfully')
     )   //delete request with status for specific ID
 
-    //For details 
+//For details 
 
     app.route('/details')
-    .get((req,res)=>
-        res.send('Details created')
-    )
+    .get(getDetails)
 
    /*  .post((req,res)=>
     res.send('200 requested created sucessfully')
@@ -60,6 +63,9 @@ const routes = (app) =>{
     .post(addNewDetails);
 
     app.route('/details/:detailID')
+
+    .get(getDetailsByID)
+
     .put((req, res) =>
     res.send('200 requested update sucessfully')    
     )
