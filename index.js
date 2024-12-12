@@ -13,7 +13,8 @@ dotenv.config({path:".env"});
 //const PORT = process.env.PORT;
 const dbURI = process.env.DATABASE_URL;
 
-//mongoose connection 
+//mongoose connection with mogodb
+
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURI)
   .then(() => console.log('Connected to MongoDB'))
@@ -23,6 +24,9 @@ mongoose.connect(dbURI)
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
+
+// serving static file 
+app.use(express.static('public'));
 
 //bodyparser setup
 
