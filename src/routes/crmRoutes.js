@@ -1,6 +1,7 @@
 //Roting the endpoints 
 import { addNewContact, getContact, getContactbyID, updateContact, deleteContactByID } from "../controllers/crmControllers";
 import { addNewDetails, getDetails, getDetailsByID, updateDetails, deleteDetailsByID } from "../controllers/crmControllers";
+//import { upload, uploadFile } from "../controllers/crmControllers";
 
 const routes = (app) =>{
 app.route('/contact')
@@ -65,6 +66,16 @@ app.route('/details/:detailID')
     res.send('Patched data')
     )
 
+    /* app.post('/upload', upload.single('file'), (req, res) => {
+        res.send('File uploaded successfully!');
+    }); */
+
 }
+// File upload 
+
+
+// Define the upload route
+//router.post('/public', upload.single('file'), uploadFile);
+
 
 export default routes;

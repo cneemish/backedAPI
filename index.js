@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import routes from './src/routes/crmRoutes'; //Importing routes
 import dotenv from "dotenv";
+import multer from 'multer';
+import path from 'path';
+
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +28,20 @@ mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
 
+// multer 
+
+//const upload = multer({ dest: 'public/' })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    },
+  });
+  
+  const upload = multer({ storage });
+
 // serving static file 
 app.use(express.static('public'));
 
@@ -38,6 +55,9 @@ routes(app);
 app.get('/', (req, res)=>
     res.send(`Node and Express Server is running on port ${PORT}`)
 );
+app.post('/api/upload',upload.single('file') ,(req,res)=>{
+    res.json(req.file);
+});
 app.listen(PORT, ()=>
 console.log(`Server is running on port ${PORT}`)
 );

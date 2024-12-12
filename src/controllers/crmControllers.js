@@ -18,7 +18,8 @@ export const addNewContact = (req, res) =>{
 import mongoose from "mongoose";
 import { ContactSchema } from "../models/crmModel";
 import { DetailsSchema } from "../models/crmModel";
-
+import multer from 'multer';
+import { FileSchema } from '../models/crmModel';
 
 const Contact = mongoose.model('Contact', ContactSchema);
 
@@ -172,3 +173,4 @@ export const deleteDetailsByID = async(req, res) =>{
 
     }
 };
+

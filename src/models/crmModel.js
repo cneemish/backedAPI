@@ -46,3 +46,23 @@ export const DetailsSchema = new Schema({
         message: 'Please enter your designation'
     }
 });
+
+//File schema 
+
+/* const FileSchema = new mongoose.Schema({
+    filename: {
+        type: String,
+        required: true,
+    },
+    path: {
+        type: String,
+        required: true,
+    },
+    
+    uploadDate: {
+        type: Date,
+        default: Date.now,
+    },
+}); */
+
+//export const file = mongoose.model('file', FileSchema);
